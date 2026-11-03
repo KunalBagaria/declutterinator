@@ -1,0 +1,397 @@
+/* Declutter-inator — set like a patent filing for an evil machine.
+   Paper and ink by day, blueprint by night. The ray is the only color. */
+
+@font-face { font-family: "Caslon"; src: url("/fonts/LibreCaslonText-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Caslon"; src: url("/fonts/LibreCaslonText-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Caslon"; src: url("/fonts/LibreCaslonText-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Plex Mono"; src: url("/fonts/IBMPlexMono-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Plex Mono"; src: url("/fonts/IBMPlexMono-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+
+:root {
+  --paper: #fcfcfa;
+  --ink: #000000;
+  --pencil: #6b6f76;
+  --rule: #d9d9d3;
+  --ray-a: #ff2e97;
+  --ray-b: #36e0f0;
+  --safe: #00a85a;
+  --fine: #e08e00;
+  --yours: #e5483f;
+  --screen: #15131c;
+  --screen-ink: #e9e6f0;
+  --serif: "Caslon", "Iowan Old Style", "Palatino", Georgia, serif;
+  --mono: "Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --measure: 37rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f2a55;
+    --ink: #eaf1fb;
+    --pencil: #a2b8dc;
+    --rule: #2f5089;
+    --safe: #3ee08f;
+    --fine: #ffbf3c;
+    --yours: #ff7a6e;
+    --screen: #0a1631;
+    color-scheme: dark;
+  }
+  body {
+    /* the faint grid of drafting film */
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font: 400 1.1875rem/1.6 var(--serif);
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--ray-a); color: #fff; }
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 120ms;
+}
+a:hover { text-decoration-color: var(--ray-a); }
+
+:focus-visible { outline: 2px solid var(--ray-a); outline-offset: 3px; }
+
+code, pre { font-family: var(--mono); }
+code { font-size: 0.84em; }
+
+.page {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+}
+
+/* ---------------------------------------------------------------- masthead */
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1rem;
+}
+.wordmark { text-decoration: none; }
+.masthead nav { display: flex; gap: 1.5rem; align-items: baseline; }
+.version { color: var(--pencil); }
+
+/* ------------------------------------------------------------------ figures */
+
+figure { margin: 0; }
+
+figcaption {
+  margin-top: 0.9rem;
+  max-width: var(--measure);
+  color: var(--pencil);
+  font-size: 1rem;
+  font-style: italic;
+}
+figcaption .fig { font-style: normal; color: var(--ink); margin-right: 0.25em; }
+
+/* Fig. 1 — the machine. Everything inside is laid out on the character grid:
+   x in ch (columns), y in line-heights (rows). 120 columns wide. */
+
+.fig1 { margin: 3.25rem 0 0; }
+
+.drawing {
+  --lh: 1.25em;
+  position: relative;
+  width: 120ch;
+  max-width: 100%;
+  padding: calc(3.2 * var(--lh)) 0 calc(4 * var(--lh));
+  font-family: var(--mono);
+  font-size: min(13.5px, calc((100vw - 2.5rem) / 72));
+  line-height: var(--lh);
+}
+
+.machine {
+  margin: 0;
+  font: inherit;
+  white-space: pre;
+  color: var(--ink);
+}
+
+.beam {
+  display: inline-block;
+  width: 30ch;
+  background: linear-gradient(to right, var(--ray-a), #a65cff 45%, var(--ray-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.beam.flash { background: var(--ink); -webkit-background-clip: text; background-clip: text; }
+.target { color: var(--ink); }
+
+.leaders {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.leaders line { stroke: var(--pencil); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+.notes { margin: 0; padding: 0; list-style: none; }
+.notes li {
+  position: absolute;
+  white-space: nowrap;
+}
+.notes span {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.14em;
+  color: var(--ink);
+}
+.notes b { font-weight: 400; font-style: normal; }
+
+.n-viewport { left: 18ch; top: calc(0.4 * var(--lh)); }
+.n-barrel   { left: 66ch; top: calc(0.4 * var(--lh)); }
+.n-lever    { left: 0;    top: calc(12.15 * var(--lh)); }
+.n-button   { left: 50ch; top: calc(12.15 * var(--lh)); }
+
+.fire {
+  margin-left: 0.35em;
+  white-space: nowrap;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.fire:hover { text-decoration-color: var(--ray-a); }
+
+/* Fig. 2 — a real terminal, so it keeps a terminal's colors. */
+
+.fig2 { margin-top: 2.5rem; }
+
+.screen {
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: 6px;
+  background: var(--screen);
+}
+.term {
+  margin: 0;
+  padding: 1.5rem 1.75rem;
+  width: max-content;
+  color: var(--screen-ink);
+  font-size: 0.8125rem;
+  line-height: 1.38;
+}
+.term b { font-weight: 500; color: #fff; }
+/* Block characters (█ ▌ ▒ …) are drawn as boxes exactly one cell wide, so bars
+   stay solid whatever monospace font ends up rendering them. */
+.term i {
+  display: inline-block;
+  width: 1ch;
+  height: 1.1em;
+  vertical-align: -0.22em;
+  --fill: currentColor;
+}
+.term .k8 { background: var(--fill); }
+.term .k7 { background: linear-gradient(to right, var(--fill) 87.5%, transparent 0); }
+.term .k6 { background: linear-gradient(to right, var(--fill) 75%, transparent 0); }
+.term .k5 { background: linear-gradient(to right, var(--fill) 62.5%, transparent 0); }
+.term .k4 { background: linear-gradient(to right, var(--fill) 50%, transparent 0); }
+.term .k3 { background: linear-gradient(to right, var(--fill) 37.5%, transparent 0); }
+.term .k2 { background: linear-gradient(to right, var(--fill) 25%, transparent 0); }
+.term .k1 { background: linear-gradient(to right, var(--fill) 12.5%, transparent 0); }
+.term .s2 { background: var(--fill); opacity: 0.5; }
+.term .s1 { background: var(--fill); opacity: 0.35; }
+.term .x45 { color: #00d7ff; }
+.term .x48 { color: #00ff87; }
+.term .x51 { color: #00ffff; }
+.term .x75 { color: #5fafff; }
+.term .x81 { color: #5fd7ff; }
+.term .x87 { color: #5fffff; }
+.term .x105 { color: #8787ff; }
+.term .x111 { color: #87afff; }
+.term .x135 { color: #af5fff; }
+.term .x141 { color: #af87ff; }
+.term .x165 { color: #d700ff; }
+.term .x171 { color: #d75fff; }
+.term .x198 { color: #ff0087; }
+.term .x199 { color: #ff00af; }
+.term .x200 { color: #ff00d7; }
+.term .x201 { color: #ff00ff; }
+.term .x203 { color: #ff5f5f; }
+.term .x214 { color: #ffaf00; }
+.term .x238 { color: #444444; }
+.term .x244 { color: #808080; }
+
+/* ------------------------------------------------------------------- prose */
+
+main > section { max-width: var(--measure); }
+main > section.intro { max-width: none; }
+.intro > p { max-width: var(--measure); }
+main > section + section,
+main > figure + section { margin-top: 5.5rem; }
+
+.intro { margin-top: 1.75rem; }
+
+h1 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  margin: 0 0 0.9rem;
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+p { margin: 0 0 1rem; }
+
+.lede {
+  margin: 1.1rem 0 2rem;
+  font-size: 1.375rem;
+  line-height: 1.5;
+}
+
+.fine { color: var(--pencil); font-size: 1rem; }
+.fine code { color: var(--ink); }
+
+/* ----------------------------------------------------------------- install */
+
+.install {
+  display: flex;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 0.9rem;
+  border: 1px solid var(--ink);
+}
+.install code {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 0.95rem 1.1rem;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.copy {
+  flex: none;
+  min-width: 5.5rem;
+  padding: 0 1.1rem;
+  border: 0;
+  border-left: 1px solid var(--ink);
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.copy:hover { background: var(--ink); color: var(--paper); }
+
+/* ------------------------------------------------------------------- lists */
+
+.tiers { margin: 1.75rem 0 0; }
+.tiers div + div { margin-top: 1.4rem; }
+.tiers dt { font-weight: 700; }
+.tiers dd { margin: 0.2rem 0 0 1.3rem; }
+.swatch {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  margin-right: 0.68em;
+  vertical-align: 0.02em;
+}
+.swatch.safe { background: var(--safe); }
+.swatch.fine { background: var(--fine); }
+.swatch.yours { background: var(--yours); }
+
+.claims { margin: 0; padding-left: 1.6rem; }
+.claims li { padding-left: 0.35rem; }
+.claims li + li { margin-top: 0.55rem; }
+.claims li::marker { font-variant-numeric: oldstyle-nums; }
+
+.commands { margin: 1.25rem 0 1.5rem; }
+.commands div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.1rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--rule);
+}
+.commands div:last-child { border-bottom: 1px solid var(--rule); }
+.commands dt code { font-size: 0.95rem; }
+.commands dd { margin: 0; }
+
+/* ----------------------------------------------------------------- footer */
+
+.colophon {
+  max-width: var(--measure);
+  margin-top: 6rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  color: var(--pencil);
+  font-size: 1rem;
+}
+.colophon p { margin-bottom: 0.4rem; }
+
+/* ----------------------------------------------------------------- small screens */
+
+@media (max-width: 46rem) {
+  body { font-size: 1.0625rem; }
+  .lede { font-size: 1.2rem; }
+
+  /* the drawing keeps the machine and the start of the beam; labels become a list */
+  .drawing {
+    width: 80ch;
+    padding: 0;
+    font-size: calc((100vw - 2.5rem) / 48);
+    overflow: hidden;
+  }
+  .masthead { font-size: 0.95rem; }
+  .masthead a, .masthead span { white-space: nowrap; }
+  .version { display: none; }
+
+  .target, .leaders { display: none; }
+  .notes { margin-top: 1.4rem; font-size: 1rem; line-height: 1.45; }
+  .notes li { position: static; white-space: normal; }
+  .notes li + li { margin-top: 0.3rem; }
+  .notes span { font-size: 1rem; }
+  .n-viewport, .n-barrel, .n-lever, .n-button { left: auto; top: auto; }
+
+  .install code { font-size: 0.875rem; padding: 0.85rem 0.9rem; }
+  .copy { min-width: 4.5rem; padding: 0 0.8rem; }
+  .term { padding: 1.1rem 1.2rem; font-size: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

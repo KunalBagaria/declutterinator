@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Declutter-inator, a disk cleaner for macOS</title>
+<meta name="description" content="Finds the gigabytes hiding in caches, build folders and old downloads on your Mac, shows you every one, and removes only what you pick. Free and open source.">
+<meta property="og:title" content="Declutter-inator">
+<meta property="og:description" content="A disk cleaner for macOS that shows you every gigabyte it found and removes only what you pick.">
+<meta property="og:url" content="https://declutter.kunalbagaria.com/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fcfcfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f2a55" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/LibreCaslonText-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+<header class="masthead">
+  <a class="wordmark" href="/">Declutter-inator</a>
+  <nav aria-label="Project">
+    <a href="https://github.com/KunalBagaria/declutterinator">Source code</a>
+    <span class="version">Version 0.1.0</span>
+  </nav>
+</header>
+
+<main>
+
+<figure class="fig1">
+  <div class="drawing">
+<pre class="machine" aria-hidden="true">                      _______________
+               ______/  ___________  \______________________
+      ___     |      | |  ( @ @ )  | |                      |\
+     [___]====|  [o] | |___________| |   DECLUTTER-INATOR   | \_________
+      | |     |  [o] |_______________|______________________|  _________|&gt;<span class="beam">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━✸</span> <span class="target"></span>
+      | |     |  [o]  [=] [=] [=] [=]      (SELF-DESTRUCT)  | /
+     _|_|_    |_____________________________________________|/
+    |_____|    (O)     (O)     (O)     (O)     (O)     (O)</pre>
+    <svg class="leaders" viewBox="0 -3.2 120 15.2" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <line x1="22" y1="-1.1" x2="29" y2="2.05"/>
+      <line x1="70" y1="-1.1" x2="73" y2="4.05"/>
+      <line x1="2" y1="8.85" x2="4.5" y2="5.6"/>
+      <line x1="51.5" y1="8.85" x2="51" y2="6.05"/>
+    </svg>
+    <ul class="notes">
+      <li class="n-lever"><span><b>Lever.</b> Pull it for a dry run first.</span></li>
+      <li class="n-viewport"><span><b>Viewport.</b> Checks thirty-odd places clutter hides.</span></li>
+      <li class="n-button"><span><b>Self-destruct button.</b> Not connected to anything.</span></li>
+      <li class="n-barrel"><span><b>Barrel.</b> Fires only after you say yes.</span></li>
+    </ul>
+  </div>
+  <figcaption><span class="fig">Fig. 1.</span> The machine, drawn in the same characters it prints in your terminal. <button type="button" class="fire" hidden>Fire it again</button></figcaption>
+</figure>
+
+<section class="intro">
+  <h1>Declutter-inator</h1>
+  <p class="lede">A disk cleaner for macOS. It finds the gigabytes hiding in caches, build folders and old downloads, shows you every one, and removes only what you pick.</p>
+  <div class="install">
+    <code id="install-command">curl -fsSL https://declutter.kunalbagaria.com/install | sh</code>
+    <button type="button" class="copy" data-copy="install-command">Copy</button>
+  </div>
+  <p class="fine">Paste it into Terminal. It installs one program to <code>~/.local/bin</code> and runs on macOS 11 or later, on Apple silicon or Intel. You can <a href="/install">read the script</a> before you run it.</p>
+</section>
+
+<section aria-labelledby="looks-for">
+  <h2 id="looks-for">What it looks for</h2>
+  <p>Everything it finds goes into one of three groups, so you always know what you’re agreeing to.</p>
+  <dl class="tiers">
+    <div>
+      <dt><span class="swatch safe" aria-hidden="true"></span>Safe to zap</dt>
+      <dd>Things that grow back on their own: app caches, logs, the Trash, Xcode DerivedData, and the download caches of npm, Yarn, pnpm, Bun, pip, uv, Cargo, Gradle, Go, CocoaPods and Homebrew. These start out selected.</dd>
+    </div>
+    <div>
+      <dt><span class="swatch fine" aria-hidden="true"></span>Probably fine</dt>
+      <dd>Things that cost a re-download or a rebuild: <code>node_modules</code>, <code>target</code>, <code>.venv</code>, <code>Pods</code> and <code>.next</code> folders in projects you haven’t touched for a month, Docker images, old installers, and zip files sitting next to the folder you unzipped them into.</dd>
+    </div>
+    <div>
+      <dt><span class="swatch yours" aria-hidden="true"></span>Your call</dt>
+      <dd>Your own files: old downloads, very large files, apps you haven’t opened in six months, iPhone backups and Xcode archives. Nothing here is ever selected for you, and whatever you pick goes to the Trash, not away for good.</dd>
+    </div>
+  </dl>
+</section>
+
+<figure class="fig2">
+  <div class="screen" tabindex="0" role="region" aria-label="Example scan report">
+<pre class="term">  <b>DISK</b>  <span class="x214"><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i><i class="k8"></i></span><span class="x199"><i class="s2"></i><i class="s2"></i><i class="s2"></i><i class="s2"></i></span><span class="x238"><i class="s1"></i><i class="s1"></i><i class="s1"></i><i class="s1"></i><i class="s1"></i></span>  <b>86%</b>  <span class="x244">425 GB of 494 GB used · 69 GB free</span>
+        <span class="x199"><i class="s2"></i></span> <span class="x244">= what the machine can reclaim without touching your own files</span>
+
+  <b><span class="x48"><i class="k4"></i>SAFE TO ZAP</span></b>  <span class="x244">caches &amp; junk that grow back on their own</span>          <b><span class="x48">  25.0 GB</span></b>
+    Application caches <span class="x244">···············</span> <b>   9.6 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x165"><i class="k8"></i></span><span class="x171"><i class="k3"></i></span>
+      <span class="x244">Google 3.1 GB · com.spotify.client 2.0 GB · +72 more</span>
+    Xcode DerivedData <span class="x244">················</span> <b>   7.9 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x201"><i class="k6"></i></span>
+      <span class="x244">MyApp 3.5 GB · Widgets 2.9 GB · +4 more</span>
+    npm cache <span class="x244">························</span> <b>   3.6 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k4"></i></span>
+    Bun cache <span class="x244">························</span> <b>   2.6 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k4"></i></span>
+      <span class="x244">+9.9 GB more is shared with your projects (APFS clones) and isn&#x27;t counted</span>
+    Headless browser downloads <span class="x244">·······</span> <b>   770 MB</b>  <span class="x198"><i class="k6"></i></span>
+      <span class="x244">Puppeteer 478 MB · Playwright 287 MB</span>
+    Homebrew leftovers <span class="x244">···············</span> <b>  ~540 MB</b>  <span class="x198"><i class="k4"></i></span>
+      <span class="x244">32 old downloads &amp; versions</span>
+
+  <b><span class="x214"><i class="k4"></i>PROBABLY FINE</span></b>  <span class="x244">safe, but costs a re-download or rebuild</span>         <b><span class="x214">  34.6 GB</span></b>
+    Project build artifacts <span class="x244">··········</span> <b>  26.5 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x165"><i class="k8"></i></span><span class="x171"><i class="k8"></i></span><span class="x171"><i class="k8"></i></span><span class="x135"><i class="k8"></i></span><span class="x135"><i class="k8"></i></span><span class="x141"><i class="k8"></i></span><span class="x141"><i class="k8"></i></span><span class="x105"><i class="k8"></i></span><span class="x105"><i class="k8"></i></span><span class="x111"><i class="k8"></i></span><span class="x75"><i class="k8"></i></span><span class="x75"><i class="k8"></i></span><span class="x81"><i class="k8"></i></span><span class="x81"><i class="k8"></i></span><span class="x45"><i class="k8"></i></span><span class="x45"><i class="k8"></i></span><span class="x51"><i class="k8"></i></span><span class="x87"><i class="k8"></i></span>
+      <span class="x244">42 projects, 37 idle for 30+ days — web-app 1.8 GB · api 1.7 GB · +40 more</span>
+    Archives you already unzipped <span class="x244">····</span> <b>   5.2 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x200"><i class="k1"></i></span>
+      <span class="x244">Photos-2025.zip 1.1 GB · assets.zip 798 MB · +79 more</span>
+    Installers & disk images <span class="x244">·········</span> <b>   2.9 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k7"></i></span>
+      <span class="x244">Docker.dmg 612 MB · Figma.dmg 231 MB · +15 more</span>
+
+  <b><span class="x203"><i class="k4"></i>YOUR CALL</span></b>  <span class="x244">your files — never touched unless you pick them</span>      <b><span class="x203">  27.3 GB</span></b>
+    Apps you don't use <span class="x244">···············</span> <b>  15.8 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x165"><i class="k8"></i></span><span class="x171"><i class="k8"></i></span><span class="x171"><i class="k8"></i></span><span class="x135"><i class="k8"></i></span><span class="x135"><i class="k8"></i></span><span class="x141"><i class="k8"></i></span><span class="x141"><i class="k8"></i></span><span class="x105"><i class="k4"></i></span>
+      <span class="x244">not opened in 180+ days — Xcode 5.6 GB · GarageBand 1.1 GB · +21 more</span>
+    Large files <span class="x244">······················</span> <b>  11.5 GB</b>  <span class="x198"><i class="k8"></i></span><span class="x198"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x199"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x200"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x201"><i class="k8"></i></span><span class="x165"><i class="k8"></i></span><span class="x171"><i class="k8"></i></span><span class="x171"><i class="k8"></i></span><span class="x135"><i class="k2"></i></span>
+      <span class="x244">500 MB or bigger — screen-recording.mov 2.2 GB · ubuntu.iso 1.4 GB · +13 more</span>
+
+  <span class="x199">❝</span> <span class="x244">node_modules: the heaviest objects in the known universe. — on Project build artifacts</span>
+
+  <span class="x238">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+   <b>POTENTIAL LOOT</b>  <span class="x198">8</span><span class="x200">6</span><span class="x165">.</span><span class="x141">9</span><span class="x111"> </span><span class="x81">G</span><span class="x87">B</span>   <span class="x244">25.0 GB zero-regret · 34.6 GB probably fine · 27.3 GB your call</span>
+  <span class="x238">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></pre>
+  </div>
+  <figcaption><span class="fig">Fig. 2.</span> A scan report. So far nothing has been touched; next, the machine asks you to pick.</figcaption>
+</figure>
+
+<section aria-labelledby="claims">
+  <h2 id="claims">What is claimed</h2>
+  <p>A machine for reclaiming disk space, wherein:</p>
+  <ol class="claims">
+    <li>nothing is removed until you confirm, and <code>clean --dry-run</code> lists every path first;</li>
+    <li>your own files go to the Trash, and only caches and build output are deleted outright;</li>
+    <li>every path is checked again right before removal: it has to be inside your home folder, and <code>.ssh</code>, Keychains, iCloud Drive, Mail and Messages are off limits;</li>
+    <li>it never follows a symlink and never wanders onto another disk;</li>
+    <li>a <code>node_modules</code> folder only counts if a <code>package.json</code> sits next to it, and a <code>target</code> folder only if a <code>Cargo.toml</code> does;</li>
+    <li>sizes are what files actually occupy, so space shared through APFS clones or hard links is never promised twice;</li>
+    <li>the self-destruct button is not connected to anything.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="usage">
+  <h2 id="usage">Using it</h2>
+  <dl class="commands">
+    <div><dt><code>declutterinator</code></dt><dd>Scan, read the report, then choose what to remove.</dd></div>
+    <div><dt><code>declutterinator clean --dry-run</code></dt><dd>List every path that would be removed. Changes nothing.</dd></div>
+    <div><dt><code>declutterinator clean --safe --yes</code></dt><dd>Clear everything in the safe group without asking. Good for a monthly cron job.</dd></div>
+    <div><dt><code>declutterinator big ~/Library -d 2</code></dt><dd>See what’s taking up space, folder by folder.</dd></div>
+    <div><dt><code>declutterinator dupes ~/Pictures</code></dt><dd>Find duplicate files, and tell real copies from APFS clones.</dd></div>
+    <div><dt><code>declutterinator categories</code></dt><dd>List everything it knows how to find.</dd></div>
+  </dl>
+  <p class="fine">Run the install line again to upgrade. To uninstall, delete <code>~/.local/bin/declutterinator</code>.</p>
+</section>
+
+</main>
+
+<footer class="colophon">
+  <p>Free and open source under the MIT license. The code, and the place to report problems, is <a href="https://github.com/KunalBagaria/declutterinator">on GitHub</a>.</p>
+  <p>Made by <a href="https://kunalbagaria.com">Kunal Bagaria</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

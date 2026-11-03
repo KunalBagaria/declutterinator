@@ -1,0 +1,15 @@
+{
+  // The website for the DECLUTTER-INATOR, served by a Cloudflare Worker.
+  // Deploy: cd site && wrangler deploy   (or scripts/release.sh --deploy)
+  "name": "declutterinator",
+  "main": "src/worker.js",
+  "compatibility_date": "2025-04-01",
+  "workers_dev": false,
+  "routes": [{ "pattern": "declutter.kunalbagaria.com", "custom_domain": true }],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  }
+}

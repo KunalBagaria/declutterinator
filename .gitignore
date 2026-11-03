@@ -1,0 +1,8 @@
+/target
+.DS_Store
+
+# website build output: binaries and the installer copy are staged by scripts/release.sh
+/site/.wrangler/
+/site/node_modules/
+/site/public/releases/
+/site/public/install.sh
