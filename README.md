@@ -32,6 +32,12 @@ again to upgrade; delete `~/.local/bin/declutterinator` to uninstall. You can
 (`DECLUTTER_INSTALL_DIR`), a pinned version (`DECLUTTER_VERSION`) or leaving your dotfiles alone
 (`DECLUTTER_NO_MODIFY_PATH=1`).
 
+Or with Homebrew:
+
+```sh
+brew install kunalbagaria/tap/declutterinator
+```
+
 Or build it from source with Rust 1.87 or newer:
 
 ```sh
@@ -119,8 +125,10 @@ The website lives in [`site/`](site): static files in `site/public`, plus a smal
 2. `scripts/release.sh` builds both architectures, merges them with `lipo`, signs the result ad hoc,
    and stages `declutterinator-<version>-macos-universal.tar.gz` (+ `.sha256`) under
    `site/public/releases/`, pointing `latest.txt` at it.
-3. `scripts/release.sh --publish` does the same, then deploys the site with `wrangler` and attaches the
-   tarball to a GitHub release.
+3. `scripts/release.sh --publish` does the same, then deploys the site with `wrangler`, attaches the
+   tarball to a GitHub release, and points the formula in
+   [KunalBagaria/homebrew-tap](https://github.com/KunalBagaria/homebrew-tap) at it. Archives are
+   reproducible, so re-running a release produces the same bytes.
 
 ## License
 

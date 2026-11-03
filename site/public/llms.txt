@@ -6,6 +6,10 @@ Install (macOS 11+, Apple silicon or Intel):
 
     curl -fsSL https://declutter.kunalbagaria.com/install | sh
 
+or with Homebrew:
+
+    brew install kunalbagaria/tap/declutterinator
+
 Then run `declutterinator` to scan, review the report and choose what to remove. `declutterinator clean --dry-run` lists every path without changing anything.
 
 What it finds:
