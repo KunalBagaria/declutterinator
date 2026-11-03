@@ -148,7 +148,7 @@ pub struct Category {
 impl Category {
     pub fn from_items(id: &str, mut items: Vec<Item>, denied: u64) -> Category {
         items.retain(|i| i.bytes > 0);
-        items.sort_by(|a, b| b.bytes.cmp(&a.bytes));
+        items.sort_by_key(|i| std::cmp::Reverse(i.bytes));
         let bytes = items.iter().map(|i| i.bytes).sum();
         Category {
             meta: crate::catalog::meta(id),

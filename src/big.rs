@@ -86,7 +86,7 @@ fn build(path: &Path, depth: usize, top: usize) -> Node {
         .par_iter()
         .map(|k| build(k, depth - 1, (top / 2).max(3)))
         .collect();
-    children.sort_by(|a, b| b.bytes.cmp(&a.bytes));
+    children.sort_by_key(|c| std::cmp::Reverse(c.bytes));
     let bytes = fsx::allocated(&md) + children.iter().map(|c| c.bytes).sum::<u64>();
     let denied = children.iter().map(|c| c.denied).sum();
     let mut rest = (0, 0);

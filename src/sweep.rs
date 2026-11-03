@@ -315,7 +315,7 @@ pub fn sweep(ctx: &Ctx) -> Found {
 
     // ---- large files
     let mut large = s.large.into_inner().unwrap();
-    large.sort_by(|a, b| b.1.cmp(&a.1));
+    large.sort_by_key(|l| std::cmp::Reverse(l.1));
     large.truncate(MAX_LARGE);
     let paths: Vec<PathBuf> = large.iter().map(|l| l.0.clone()).collect();
     let used = shell::mdls_dates(&paths, "kMDItemLastUsedDate");

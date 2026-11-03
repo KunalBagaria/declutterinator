@@ -22,7 +22,7 @@ mod ui;
 use anyhow::{Context, Result, bail};
 use clap::{Args, Parser, Subcommand};
 use model::Risk;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
 #[command(
@@ -168,7 +168,7 @@ fn ctx(args: &ScanArgs) -> Result<scan::Ctx> {
     for p in &args.projects {
         let c = std::fs::canonicalize(p)
             .with_context(|| format!("can't open --projects {}", p.display()))?;
-        if c == PathBuf::from("/") {
+        if c == Path::new("/") {
             bail!("--projects / would be a bit much, even for an evil genius");
         }
         extra_roots.push(c);
