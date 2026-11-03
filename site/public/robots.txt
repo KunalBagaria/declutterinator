@@ -1,0 +1,6 @@
+# Everyone is welcome, search engines and AI assistants alike.
+User-agent: *
+Allow: /
+Disallow: /releases/
+
+Sitemap: https://declutter.kunalbagaria.com/sitemap.xml

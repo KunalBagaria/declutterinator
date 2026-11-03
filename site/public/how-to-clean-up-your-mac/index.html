@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Clean Up Your Mac and Free Up Disk Space (Step by Step)</title>
+<meta name="description" content="Mac storage full? Here is every place macOS hides wasted space: caches, Downloads, large files, System Data, iPhone backups, Xcode, node_modules, Docker, and how to clear each one safely.">
+<link rel="canonical" href="https://declutter.kunalbagaria.com/how-to-clean-up-your-mac/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Kunal Bagaria">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Declutter-inator">
+<meta property="og:title" content="How to clean up your Mac and free up disk space">
+<meta property="og:description" content="Every place macOS hides wasted gigabytes, and how to clear each one safely, by hand or with one command.">
+<meta property="og:url" content="https://declutter.kunalbagaria.com/how-to-clean-up-your-mac/">
+<meta property="og:image" content="https://declutter.kunalbagaria.com/og-guide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="How to clean up your Mac, with the Declutter-inator machine firing at a node_modules folder">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-11-04">
+<meta property="article:modified_time" content="2026-11-04">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to clean up your Mac and free up disk space">
+<meta name="twitter:description" content="Every place macOS hides wasted gigabytes, and how to clear each one safely.">
+<meta name="twitter:image" content="https://declutter.kunalbagaria.com/og-guide.png">
+<meta name="theme-color" content="#fcfcfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f2a55" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/fonts/LibreCaslonText-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to clean up your Mac",
+    "description": "Every place macOS hides wasted disk space, from caches and Downloads to System Data, iPhone backups, Xcode, node_modules and Docker, and how to clear each one safely.",
+    "image": [
+      "https://declutter.kunalbagaria.com/og-guide.png"
+    ],
+    "datePublished": "2026-11-04",
+    "dateModified": "2026-11-04",
+    "author": {
+      "@type": "Person",
+      "name": "Kunal Bagaria",
+      "url": "https://kunalbagaria.com"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Kunal Bagaria",
+      "url": "https://kunalbagaria.com"
+    },
+    "mainEntityOfPage": "https://declutter.kunalbagaria.com/how-to-clean-up-your-mac/",
+    "about": [
+      "Mac storage",
+      "Disk cleanup",
+      "macOS"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I clean up my Mac for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Empty the Trash, clear ~/Library/Caches, sort Downloads by size, delete old iPhone backups and remove apps you don’t use. If you write code, delete node_modules in old projects and clear Xcode’s DerivedData. All of it is free, either by hand with the steps above or with the free, open-source Declutter-inator."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to delete the files in ~/Library/Caches?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Caches only exist to make apps faster, and apps rebuild them when they need them. Quit the apps first, delete the folders inside Caches rather than the folder itself, and leave the com.apple. folders to macOS."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is System Data on a Mac, and how do I reduce it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "System Data is everything macOS doesn’t put in another category: caches, logs, Time Machine local snapshots, virtual memory and developer tool data like Xcode simulators and Docker images. Clearing caches and logs, removing local snapshots, cleaning up Xcode and Docker, and restarting your Mac all reduce it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my Mac storage still full after deleting files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Deleted files stay in the Trash until it’s emptied. Time Machine snapshots can also hold on to deleted files for a while, and the Storage settings can take a few minutes to update. Empty the Trash, then check again after a minute."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to delete node_modules?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, as long as the project has a package.json next to it. Running npm install, yarn, pnpm install or bun install in that project brings it back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a paid Mac cleaner app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Everything a cleaner app does is in this guide, and the free, open-source Declutter-inator does it from Terminal while showing you every file before it removes anything."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Declutter-inator",
+        "item": "https://declutter.kunalbagaria.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "How to clean up your Mac",
+        "item": "https://declutter.kunalbagaria.com/how-to-clean-up-your-mac/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body>
+<div class="page">
+
+<header class="masthead">
+  <a class="wordmark" href="/">Declutter-inator</a>
+  <nav aria-label="Project">
+    <a href="https://github.com/KunalBagaria/declutterinator">Source code</a>
+    <span class="version">Version 0.1.1</span>
+  </nav>
+</header>
+
+<main>
+<article class="guide">
+
+<header class="guide-head">
+  <h1>How to clean up your Mac</h1>
+  <p class="lede">When your Mac says the disk is almost full, the space is usually hiding in the same dozen places: caches, Downloads, backups, and the leftovers of developer tools that macOS files under System Data. Here is where to look, roughly how big each one gets, and how to clear it without breaking anything.</p>
+  <p class="byline">Updated November 4, 2026, by <a href="https://kunalbagaria.com">Kunal Bagaria</a>.</p>
+</header>
+
+<aside class="shortcut" aria-labelledby="shortcut-title">
+  <h2 id="shortcut-title">The one-command version</h2>
+  <p>Declutter-inator is a free, open-source tool that checks every place below in about fifteen seconds, shows you each folder and its size, and removes only what you pick. Paste this into Terminal, then run <code>declutterinator</code>.</p>
+  <div class="install">
+    <code id="install-command">curl -fsSL https://declutter.kunalbagaria.com/install | sh</code>
+    <button type="button" class="copy" data-copy="install-command">Copy</button>
+  </div>
+  <p class="fine">Prefer to do it by hand? Every step below works without it.</p>
+</aside>
+
+<nav class="toc" aria-labelledby="toc-title">
+  <h2 id="toc-title">On this page</h2>
+  <ol>
+    <li><a href="#see-what-is-using-space">See what’s using the space</a></li>
+    <li><a href="#empty-the-trash">Empty the Trash</a></li>
+    <li><a href="#clear-app-caches">Clear app caches and logs</a></li>
+    <li><a href="#clean-out-downloads">Clean out Downloads</a></li>
+    <li><a href="#find-large-files">Find large files</a></li>
+    <li><a href="#remove-unused-apps">Remove apps you don’t use</a></li>
+    <li><a href="#delete-iphone-backups">Delete old iPhone and iPad backups</a></li>
+    <li><a href="#shrink-system-data">Shrink System Data</a></li>
+    <li><a href="#node-modules">Delete node_modules and build folders</a></li>
+    <li><a href="#package-caches">Clear package manager caches</a></li>
+    <li><a href="#xcode">Clean up Xcode</a></li>
+    <li><a href="#docker">Clean up Docker</a></li>
+    <li><a href="#let-macos-help">Let macOS keep it clean</a></li>
+  </ol>
+  <p><a href="#questions">Questions people ask</a></p>
+</nav>
+
+<section id="see-what-is-using-space">
+  <h2><span class="n">1.</span> See what’s using the space</h2>
+  <p>Open <b>System Settings → General → Storage</b>. The bar at the top splits your disk into Applications, Documents, Photos, iOS Files, macOS, System Data and so on, and the list below lets you open each one.</p>
+  <p>For a precise answer, ask Terminal which folders in your home are biggest:</p>
+  <pre class="cmd"><code>du -sh ~/* ~/Library/* 2&gt;/dev/null | sort -h | tail -20</code></pre>
+  <p>The last lines are the largest. On most Macs, <code>~/Library</code> and <code>~/Downloads</code> are near the bottom, and for developers so is the folder their projects live in.</p>
+</section>
+
+<section id="empty-the-trash">
+  <h2><span class="n">2.</span> Empty the Trash</h2>
+  <p>Deleted files still take up space until the Trash is emptied, which is why freeing space sometimes seems to do nothing. In the Finder choose <b>Finder → Empty Trash</b>, or press <kbd>⇧⌘⌫</kbd>.</p>
+  <p>To stop it piling up again, open <b>Finder → Settings → Advanced</b> and turn on <b>Remove items from the Trash after 30 days</b>.</p>
+</section>
+
+<section id="clear-app-caches">
+  <h2><span class="n">3.</span> Clear app caches and logs</h2>
+  <p>Apps keep caches in <code>~/Library/Caches</code> so things load faster next time. Browsers, Spotify, Slack and messaging apps can each hold a gigabyte or more. Everything in there is safe to delete: apps rebuild what they need, at the cost of a slower first launch.</p>
+  <ol class="steps">
+    <li>Quit the apps you can.</li>
+    <li>In the Finder, press <kbd>⇧⌘G</kbd> and go to <code>~/Library/Caches</code>.</li>
+    <li>Delete the folders inside it, not the Caches folder itself. Leave the folders starting with <code>com.apple.</code> to macOS.</li>
+  </ol>
+  <p>To see which caches are biggest first:</p>
+  <pre class="cmd"><code>du -sh ~/Library/Caches/* 2&gt;/dev/null | sort -h | tail -15</code></pre>
+  <p>Crash reports and diagnostic logs in <code>~/Library/Logs</code> can go the same way.</p>
+</section>
+
+<section id="clean-out-downloads">
+  <h2><span class="n">4.</span> Clean out Downloads</h2>
+  <p>Downloads is where installers, zip files and one-off files collect for years. Open it in the Finder, switch to list view with <kbd>⌘2</kbd>, and sort by <b>Date Added</b> or <b>Size</b>. Three kinds of file are usually safe to go:</p>
+  <ul>
+    <li><b>Disk images and installers</b> (<code>.dmg</code>, <code>.pkg</code>) for apps you’ve already installed.</li>
+    <li><b>Zip files sitting next to the folder they unzipped into.</b> You have the contents twice.</li>
+    <li><b>Anything you haven’t opened in months.</b> Move it to the Trash rather than deleting it outright, in case you change your mind.</li>
+  </ul>
+</section>
+
+<section id="find-large-files">
+  <h2><span class="n">5.</span> Find large files</h2>
+  <p>In <b>System Settings → General → Storage</b>, click the <b>ⓘ</b> next to Documents and open <b>Large Files</b>. Or list every file over 1 GB in your home folder from Terminal:</p>
+  <pre class="cmd"><code>find ~ -xdev -type f -size +1G -not -path "*/Library/*" 2&gt;/dev/null</code></pre>
+  <p>Old screen recordings, exported videos, virtual machine images and disk images are the usual finds. Only you can tell which are worth keeping, so check each one before you remove it.</p>
+</section>
+
+<section id="remove-unused-apps">
+  <h2><span class="n">6.</span> Remove apps you don’t use</h2>
+  <p>In the Storage settings, click the <b>ⓘ</b> next to Applications to see every app with its size. To remove one, drag it from the Applications folder to the Trash. Big apps you may have forgotten about include Xcode, GarageBand, older versions of Office, and games.</p>
+  <p>Some apps leave settings and data behind in <code>~/Library/Application Support</code>, in a folder named after the app. Once the app is gone, that folder can go too.</p>
+</section>
+
+<section id="delete-iphone-backups">
+  <h2><span class="n">7.</span> Delete old iPhone and iPad backups</h2>
+  <p>Each local backup of an iPhone or iPad can take tens of gigabytes, and backups of phones you no longer own never go away by themselves. In <b>System Settings → General → Storage</b>, click the <b>ⓘ</b> next to <b>iOS Files</b> to see them with their dates, and delete the ones you don’t need. Keep at least the latest backup of every device you still use, unless it backs up to iCloud.</p>
+</section>
+
+<section id="shrink-system-data">
+  <h2><span class="n">8.</span> Shrink System Data</h2>
+  <p>System Data is the catch-all for everything macOS doesn’t put in another category: caches, logs, Time Machine local snapshots, virtual memory, and the data of developer tools like Xcode simulators and Docker. You can’t delete it as a whole, but you can shrink most of what’s in it.</p>
+  <ul>
+    <li><b>Caches and logs:</b> see <a href="#clear-app-caches">step 3</a>.</li>
+    <li><b>Time Machine local snapshots:</b> list them with <code>tmutil listlocalsnapshots /</code>. macOS deletes them on its own when space runs low, but you can remove them now with <code>sudo tmutil deletelocalsnapshots /</code>.</li>
+    <li><b>Developer tools:</b> see <a href="#xcode">Xcode</a> and <a href="#docker">Docker</a> below.</li>
+  </ul>
+  <p>Restarting your Mac also clears swap files and other temporary data, which can take System Data down by several gigabytes.</p>
+</section>
+
+<section id="node-modules">
+  <h2><span class="n">9.</span> Delete <code>node_modules</code> and build folders</h2>
+  <p>If you write code, this is usually the biggest win. Every JavaScript project keeps its dependencies in <code>node_modules</code>, often several hundred megabytes each. Rust projects keep build output in <code>target</code>, and Python projects keep a virtual environment in <code>.venv</code>. All of them come back with <code>npm install</code>, <code>cargo build</code> or <code>pip install</code>, so the copies in projects you aren’t working on are dead weight.</p>
+  <p>To list them with their sizes (change <code>~/code</code> to wherever your projects live):</p>
+  <pre class="cmd"><code>find ~/code -name node_modules -type d -prune -exec du -sh {} + 2&gt;/dev/null | sort -h</code></pre>
+  <p>Remove the ones you don’t need with <code>rm -rf path/to/node_modules</code>. Only delete a <code>node_modules</code> folder that sits next to a <code>package.json</code>, and a <code>target</code> folder next to a <code>Cargo.toml</code>; a folder with the same name somewhere else might be something you made.</p>
+</section>
+
+<section id="package-caches">
+  <h2><span class="n">10.</span> Clear package manager caches</h2>
+  <p>Package managers keep a copy of everything they have ever downloaded. Clearing these is safe; the next install just downloads again.</p>
+  <dl class="tools">
+    <div><dt>npm</dt><dd><code>npm cache clean --force</code></dd></div>
+    <div><dt>Yarn</dt><dd><code>yarn cache clean</code></dd></div>
+    <div><dt>pnpm</dt><dd><code>pnpm store prune</code></dd></div>
+    <div><dt>Bun</dt><dd><code>rm -rf ~/.bun/install/cache</code></dd></div>
+    <div><dt>pip</dt><dd><code>pip cache purge</code></dd></div>
+    <div><dt>uv</dt><dd><code>uv cache clean</code></dd></div>
+    <div><dt>Cargo</dt><dd><code>rm -rf ~/.cargo/registry/cache ~/.cargo/registry/src</code></dd></div>
+    <div><dt>Go</dt><dd><code>go clean -cache -modcache</code></dd></div>
+    <div><dt>Gradle</dt><dd><code>rm -rf ~/.gradle/caches</code></dd></div>
+    <div><dt>CocoaPods</dt><dd><code>pod cache clean --all</code></dd></div>
+    <div><dt>Homebrew</dt><dd><code>brew cleanup --prune=all</code> and <code>brew autoremove</code></dd></div>
+  </dl>
+  <p>Bun, pnpm and uv copy packages into your projects as APFS clones, which share storage with the cache. Clearing their cache frees less than its size suggests until the projects’ own copies are gone too.</p>
+</section>
+
+<section id="xcode">
+  <h2><span class="n">11.</span> Clean up Xcode</h2>
+  <p>Xcode can quietly take 20 to 50 GB on top of its own size.</p>
+  <ul>
+    <li><b>DerivedData</b> holds build products and indexes for every project you have built. Delete it with <code>rm -rf ~/Library/Developer/Xcode/DerivedData</code>; Xcode rebuilds it, and the next build is slower.</li>
+    <li><b>Simulators</b> for iOS versions you no longer have installed: <code>xcrun simctl delete unavailable</code>. Whole simulator runtimes are listed by <code>xcrun simctl runtime list</code> and can be removed in <b>Xcode → Settings → Components</b>.</li>
+    <li><b>Device support files</b> in <code>~/Library/Developer/Xcode/iOS DeviceSupport</code> are copied for every iOS version you have connected a device with. Folders for versions you no longer test on can go.</li>
+    <li><b>Archives</b>, in <b>Window → Organizer</b>, hold the debug symbols for builds you shipped. Keep the ones whose crash reports you still care about.</li>
+  </ul>
+</section>
+
+<section id="docker">
+  <h2><span class="n">12.</span> Clean up Docker</h2>
+  <p>Docker keeps images, stopped containers and build cache inside one large disk image. See how much of it is reclaimable with <code>docker system df</code>, then:</p>
+  <pre class="cmd"><code>docker system prune        # stopped containers, unused networks, dangling images, build cache
+docker system prune -a     # …and every image no container is using</code></pre>
+  <p>Volumes, where databases keep their data, are only removed if you add <code>--volumes</code>. Docker Desktop’s settings, under Resources, also let you cap how big its disk image can grow.</p>
+</section>
+
+<section id="let-macos-help">
+  <h2><span class="n">13.</span> Let macOS keep it clean</h2>
+  <p>Under <b>System Settings → General → Storage</b>, the recommendations can do some of this for you from now on:</p>
+  <ul>
+    <li><b>Store in iCloud</b> keeps recent Desktop and Documents files on your Mac and the rest in iCloud.</li>
+    <li><b>Optimize Storage</b> removes Apple TV movies and shows you have already watched.</li>
+    <li><b>Empty Trash Automatically</b> deletes items that have been in the Trash for 30 days.</li>
+  </ul>
+  <p>Photos has its own switch: in <b>Photos → Settings → iCloud</b>, choose <b>Optimize Mac Storage</b> to keep full-size originals in iCloud and smaller versions on your Mac.</p>
+</section>
+
+<section id="all-at-once" class="shortcut-again">
+  <h2>Or do all of it at once</h2>
+  <p>Declutter-inator automates most of steps 2 to 12. It sorts everything it finds into three groups: things that grow back on their own, things that cost a re-download or rebuild, and your own files, which are never selected for you. It also spots <code>node_modules</code> in projects you haven’t touched for a month, zip files you already unzipped, and apps you haven’t opened in six months. Nothing is removed until you confirm, and your own files go to the Trash.</p>
+  <div class="install">
+    <code id="install-command-2">curl -fsSL https://declutter.kunalbagaria.com/install | sh</code>
+    <button type="button" class="copy" data-copy="install-command-2">Copy</button>
+  </div>
+  <p class="fine">Free and open source. <a href="/">See what it looks like</a> or <a href="https://github.com/KunalBagaria/declutterinator">read the code</a>.</p>
+</section>
+
+<section id="questions" class="faq">
+  <h2>Questions people ask</h2>
+
+  <h3>How do I clean up my Mac for free?</h3>
+  <p>Empty the Trash, clear <code>~/Library/Caches</code>, sort Downloads by size, delete old iPhone backups and remove apps you don’t use. If you write code, delete <code>node_modules</code> in old projects and clear Xcode’s DerivedData. All of it is free, either by hand with the steps above or with the free, open-source Declutter-inator.</p>
+
+  <h3>Is it safe to delete the files in ~/Library/Caches?</h3>
+  <p>Yes. Caches only exist to make apps faster, and apps rebuild them when they need them. Quit the apps first, delete the folders inside Caches rather than the folder itself, and leave the <code>com.apple.</code> folders to macOS.</p>
+
+  <h3>What is System Data on a Mac, and how do I reduce it?</h3>
+  <p>System Data is everything macOS doesn’t put in another category: caches, logs, Time Machine local snapshots, virtual memory and developer tool data like Xcode simulators and Docker images. Clearing caches and logs, removing local snapshots, cleaning up Xcode and Docker, and restarting your Mac all reduce it.</p>
+
+  <h3>Why is my Mac storage still full after deleting files?</h3>
+  <p>Deleted files stay in the Trash until it’s emptied. Time Machine snapshots can also hold on to deleted files for a while, and the Storage settings can take a few minutes to update. Empty the Trash, then check again after a minute.</p>
+
+  <h3>Is it safe to delete node_modules?</h3>
+  <p>Yes, as long as the project has a <code>package.json</code> next to it. Running <code>npm install</code>, <code>yarn</code>, <code>pnpm install</code> or <code>bun install</code> in that project brings it back.</p>
+
+  <h3>Do I need a paid Mac cleaner app?</h3>
+  <p>No. Everything a cleaner app does is in this guide, and the free, open-source Declutter-inator does it from Terminal while showing you every file before it removes anything.</p>
+</section>
+
+</article>
+</main>
+
+<footer class="colophon">
+  <p>Declutter-inator is free and open source under the MIT license. The code, and the place to report problems, is <a href="https://github.com/KunalBagaria/declutterinator">on GitHub</a>.</p>
+  <p>Made by <a href="https://kunalbagaria.com">Kunal Bagaria</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

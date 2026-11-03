@@ -1,6 +1,6 @@
 [package]
 name = "declutterinator"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "BEHOLD! A macOS disk analyzer & cleaner that reclaims every wasted gigabyte in the Tri-State Area."
 license = "MIT"

@@ -3,19 +3,93 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Declutter-inator, a disk cleaner for macOS</title>
-<meta name="description" content="Finds the gigabytes hiding in caches, build folders and old downloads on your Mac, shows you every one, and removes only what you pick. Free and open source.">
-<meta property="og:title" content="Declutter-inator">
-<meta property="og:description" content="A disk cleaner for macOS that shows you every gigabyte it found and removes only what you pick.">
-<meta property="og:url" content="https://declutter.kunalbagaria.com/">
+<title>Declutter-inator: Clean Up Your Mac &amp; Free Up Disk Space</title>
+<meta name="description" content="A free, open-source way to clean up your Mac. Finds the gigabytes hiding in caches, Xcode, node_modules, Docker and old downloads, shows you every one, and deletes only what you pick.">
+<link rel="canonical" href="https://declutter.kunalbagaria.com/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Kunal Bagaria">
+<meta name="application-name" content="Declutter-inator">
+<meta name="apple-mobile-web-app-title" content="Declutter-inator">
+
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Declutter-inator">
+<meta property="og:title" content="Declutter-inator: clean up your Mac and free up disk space">
+<meta property="og:description" content="A free, open-source disk cleaner for macOS. See every gigabyte it found, and delete only what you pick.">
+<meta property="og:url" content="https://declutter.kunalbagaria.com/">
+<meta property="og:image" content="https://declutter.kunalbagaria.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Declutter-inator, an ASCII-art machine, firing a ray at a node_modules folder">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Declutter-inator: clean up your Mac and free up disk space">
+<meta name="twitter:description" content="A free, open-source disk cleaner for macOS. See every gigabyte it found, and delete only what you pick.">
+<meta name="twitter:image" content="https://declutter.kunalbagaria.com/og.png">
+<meta name="twitter:image:alt" content="The Declutter-inator, an ASCII-art machine, firing a ray at a node_modules folder">
+
 <meta name="theme-color" content="#fcfcfa" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f2a55" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/LibreCaslonText-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css">
 <script src="/app.js" defer></script>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Declutter-inator",
+    "alternateName": [
+      "Declutterinator",
+      "declutterinator"
+    ],
+    "description": "A free, open-source disk cleaner for macOS. It finds the gigabytes hiding in app caches, Xcode DerivedData, node_modules, Docker, package manager caches and old downloads, shows you every one, and removes only what you pick.",
+    "url": "https://declutter.kunalbagaria.com/",
+    "image": "https://declutter.kunalbagaria.com/og.png",
+    "screenshot": "https://declutter.kunalbagaria.com/og.png",
+    "applicationCategory": "UtilitiesApplication",
+    "applicationSubCategory": "Disk cleaner",
+    "operatingSystem": "macOS 11 or later",
+    "softwareVersion": "0.1.1",
+    "downloadUrl": "https://declutter.kunalbagaria.com/install",
+    "installUrl": "https://declutter.kunalbagaria.com/install",
+    "isAccessibleForFree": true,
+    "license": "https://opensource.org/licenses/MIT",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Clears app caches, logs and the Trash",
+      "Finds node_modules, Rust target and .venv folders in projects you haven't touched in a month",
+      "Clears Xcode DerivedData, old device support files and unavailable simulators",
+      "Cleans npm, Yarn, pnpm, Bun, pip, uv, Cargo, Gradle, Go, CocoaPods and Homebrew caches",
+      "Finds old downloads, installers, zip files you already unzipped, large files and apps you don't use",
+      "Finds duplicate files and tells real copies from APFS clones",
+      "Shows every path before deleting, and moves your own files to the Trash"
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Kunal Bagaria",
+      "url": "https://kunalbagaria.com"
+    },
+    "sameAs": [
+      "https://github.com/KunalBagaria/declutterinator"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Declutter-inator",
+    "url": "https://declutter.kunalbagaria.com/"
+  }
+]
+</script>
 </head>
 <body>
 <div class="page">
@@ -24,7 +98,7 @@
   <a class="wordmark" href="/">Declutter-inator</a>
   <nav aria-label="Project">
     <a href="https://github.com/KunalBagaria/declutterinator">Source code</a>
-    <span class="version">Version 0.1.0</span>
+    <span class="version">Version 0.1.1</span>
   </nav>
 </header>
 
@@ -58,7 +132,7 @@
 
 <section class="intro">
   <h1>Declutter-inator</h1>
-  <p class="lede">A disk cleaner for macOS. It finds the gigabytes hiding in caches, build folders and old downloads, shows you every one, and removes only what you pick.</p>
+  <p class="lede">A free, open-source way to clean up your Mac. It finds the gigabytes hiding in caches, build folders and old downloads, shows you every one, and removes only what you pick.</p>
   <div class="install">
     <code id="install-command">curl -fsSL https://declutter.kunalbagaria.com/install | sh</code>
     <button type="button" class="copy" data-copy="install-command">Copy</button>
@@ -68,7 +142,7 @@
 
 <section aria-labelledby="looks-for">
   <h2 id="looks-for">What it looks for</h2>
-  <p>Everything it finds goes into one of three groups, so you always know what you’re agreeing to.</p>
+  <p>Everything it finds goes into one of three groups, so you always know what you’re agreeing to. If you’d rather free up disk space by hand, the guide to <a href="/how-to-clean-up-your-mac/">cleaning up your Mac</a> covers each of these places and the commands to clear them.</p>
   <dl class="tiers">
     <div>
       <dt><span class="swatch safe" aria-hidden="true"></span>Safe to zap</dt>
@@ -156,7 +230,7 @@
 </main>
 
 <footer class="colophon">
-  <p>Free and open source under the MIT license. The code, and the place to report problems, is <a href="https://github.com/KunalBagaria/declutterinator">on GitHub</a>.</p>
+  <p>Free and open source under the MIT license. The code, and the place to report problems, is <a href="https://github.com/KunalBagaria/declutterinator">on GitHub</a>. Prefer doing it yourself? Read <a href="/how-to-clean-up-your-mac/">how to clean up your Mac by hand</a>.</p>
   <p>Made by <a href="https://kunalbagaria.com">Kunal Bagaria</a>.</p>
 </footer>
 

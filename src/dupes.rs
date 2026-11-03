@@ -286,6 +286,7 @@ pub fn run(
         .collect();
     let defaults: Vec<bool> = flat.iter().map(|(g, d)| d.frees >= g.len / 10).collect();
     println!();
+    println!("  {}", ui::dim(crate::picker::KEYS));
     let Some(picked) = MultiSelect::with_theme(&theme())
         .with_prompt("Spare copies to send to the Trash (the 'keep' copy always stays)")
         .items(&labels)

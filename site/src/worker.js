@@ -12,12 +12,24 @@ const SECURITY = {
 };
 
 const SHORT = "public, max-age=300";
+const DAY = "public, max-age=86400";
 const FOREVER = "public, max-age=31536000, immutable";
 
 function cacheFor(path) {
   if (path.startsWith("/fonts/") || /^\/releases\/v[^/]+\//.test(path)) return FOREVER;
   if (path === "/install" || path === "/install.sh" || path === "/releases/latest.txt") return SHORT;
+  if (/\.(png|svg|webmanifest)$/.test(path)) return DAY;
   return null; // let the asset defaults (with ETags) apply
+}
+
+// Machine-facing files: fetchable, but never shown as search results.
+function noindex(path) {
+  return (
+    path === "/install" ||
+    path === "/install.sh" ||
+    path.startsWith("/releases/") ||
+    /^\/[0-9a-f]{32}\.txt$/.test(path) // IndexNow key
+  );
 }
 
 export default {
@@ -40,6 +52,7 @@ export default {
       response.headers.set("content-type", "text/plain; charset=utf-8");
     }
     for (const [name, value] of Object.entries(SECURITY)) response.headers.set(name, value);
+    if (noindex(path)) response.headers.set("x-robots-tag", "noindex");
     const cache = cacheFor(path);
     if (cache && response.ok) response.headers.set("cache-control", cache);
     return response;

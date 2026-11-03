@@ -1,0 +1,13 @@
+<!doctype html>
+<!-- Source for the PNG icons: the favicon's spark, centered on paper. ?size=180 etc. -->
+<html><head><meta charset="utf-8"><style>
+  html, body { margin: 0; height: 100%; background: #888; }
+  body { display: grid; place-items: center; }
+  .tile { background: #fcfcfa; display: grid; place-items: center; }
+  .tile img { width: 64%; height: 64%; }
+</style></head>
+<body><div class="tile" id="t"><img src="/public/favicon.svg" alt=""></div>
+<script>
+  const s = +(new URLSearchParams(location.search).get("size") || 180);
+  Object.assign(document.getElementById("t").style, { width: s + "px", height: s + "px" });
+</script></body></html>

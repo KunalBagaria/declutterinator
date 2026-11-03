@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Source for the social preview images. Render at 1200x630:
+     site/og/render.sh  (writes site/public/og.png and og-guide.png) -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Caslon"; src: url("/public/fonts/LibreCaslonText-Regular.woff2"); }
+  @font-face { font-family: "Caslon"; src: url("/public/fonts/LibreCaslonText-Italic.woff2"); font-style: italic; }
+  @font-face { font-family: "Plex Mono"; src: url("/public/fonts/IBMPlexMono-Regular.woff2"); }
+  html, body { margin: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #fcfcfa; color: #000; font-family: "Caslon", Georgia, serif; }
+  .card { box-sizing: border-box; height: 630px; padding: 58px 72px 56px; display: flex; flex-direction: column; }
+  .site { font-size: 24px; color: #6b6f76; font-style: italic; }
+  pre { margin: 34px 0 0; font: 16px/1.22 "Plex Mono", monospace; }
+  .beam { background: linear-gradient(to right, #ff2e97, #a65cff 45%, #36e0f0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .dust { color: #6b6f76; }
+  h1 { margin: auto 0 0; font-weight: 400; font-size: 82px; line-height: 1; letter-spacing: -0.015em; }
+  p { margin: 18px 0 0; font-size: 33px; line-height: 1.25; max-width: 980px; }
+  .guide h1 { font-size: 72px; }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="site">declutter.kunalbagaria.com</div>
+<pre>                      _______________
+               ______/  ___________  \______________________
+      ___     |      | |  ( @ @ )  | |                      |\
+     [___]====|  [o] | |___________| |   DECLUTTER-INATOR   | \_________
+      | |     |  [o] |_______________|______________________|  _________|&gt;<span class="beam">━━━━━━━━━━━━━━━━━✸</span> <span class="dust">no▒▓░e_m·d░l▒s/</span>
+      | |     |  [o]  [=] [=] [=] [=]      (SELF-DESTRUCT)  | /
+     _|_|_    |_____________________________________________|/
+    |_____|    (O)     (O)     (O)     (O)     (O)     (O)</pre>
+  <h1 id="title">Declutter-inator</h1>
+  <p id="line">A free disk cleaner for macOS. See every gigabyte it found, and delete only what you pick.</p>
+</div>
+<script>
+  // ?guide renders the card for the how-to page
+  if (location.search.includes("guide")) {
+    document.getElementById("card").classList.add("guide");
+    document.getElementById("title").textContent = "How to clean up your Mac";
+    document.getElementById("line").textContent = "Every place macOS hides wasted gigabytes, and how to clear each one safely.";
+  }
+</script>
+</body>
+</html>

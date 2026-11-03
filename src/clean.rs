@@ -5,8 +5,6 @@ use crate::scan::{Ctx, Scan};
 use crate::ui::{self, GREY, PINK, RED, YELLOW};
 use crate::{art, catalog, fsx, report, shell};
 use anyhow::{Result, bail};
-use console::style;
-use dialoguer::theme::ColorfulTheme;
 use dialoguer::{Confirm, MultiSelect};
 use indicatif::{ProgressBar, ProgressStyle};
 use std::io::IsTerminal;
@@ -24,16 +22,8 @@ pub fn interactive() -> bool {
     std::io::stdin().is_terminal() && std::io::stderr().is_terminal()
 }
 
-pub fn theme() -> ColorfulTheme {
-    ColorfulTheme {
-        checked_item_prefix: style("✸".to_string()).for_stderr().color256(PINK),
-        unchecked_item_prefix: style("○".to_string()).for_stderr().color256(240),
-        active_item_prefix: style("▶".to_string()).for_stderr().color256(ui::CYAN),
-        inactive_item_prefix: style(" ".to_string()).for_stderr(),
-        prompt_prefix: style("⚡".to_string()).for_stderr().color256(YELLOW),
-        success_prefix: style("✓".to_string()).for_stderr().color256(ui::GREEN),
-        ..ColorfulTheme::default()
-    }
+pub fn theme() -> crate::picker::PickerTheme {
+    crate::picker::PickerTheme::new()
 }
 
 fn page_len() -> usize {
@@ -197,10 +187,7 @@ fn pick_categories(scan: &Scan) -> Result<Option<Vec<&Category>>> {
         .iter()
         .map(|c| c.meta.risk == Risk::Safe)
         .collect();
-    println!(
-        "  {}",
-        ui::dim("↑/↓ move · space toggle · a toggle all · enter FIRE · esc retreat")
-    );
+    println!("  {}", ui::dim(crate::picker::KEYS));
     let picked = MultiSelect::with_theme(&theme())
         .with_prompt("Choose your targets")
         .items(&labels)
@@ -229,6 +216,7 @@ fn pick_items<'a>(cat: &'a Category, _ctx: &Ctx) -> Result<Option<Vec<&'a Item>>
         ui::bold(cat.meta.name),
         ui::dim(format!("— {}", cat.meta.desc))
     );
+    println!("  {}", ui::dim(crate::picker::KEYS));
     let picked = MultiSelect::with_theme(&theme())
         .with_prompt(format!(
             "Pick the victims ({} → {})",

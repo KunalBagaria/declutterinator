@@ -12,6 +12,7 @@ mod dupes;
 mod finders;
 mod fsx;
 mod model;
+mod picker;
 mod report;
 mod scan;
 mod shell;

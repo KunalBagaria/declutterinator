@@ -1,0 +1,14 @@
+{
+  "name": "Declutter-inator",
+  "short_name": "Declutter",
+  "description": "A free, open-source disk cleaner for macOS.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fcfcfa",
+  "theme_color": "#fcfcfa",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

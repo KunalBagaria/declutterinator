@@ -1,0 +1,24 @@
+# Declutter-inator
+
+> A free, open-source command-line disk cleaner for macOS. It finds wasted disk space in caches, developer tools and old files, shows the user every item and its size, and removes only what they confirm. MIT licensed, written in Rust, by Kunal Bagaria.
+
+Install (macOS 11+, Apple silicon or Intel):
+
+    curl -fsSL https://declutter.kunalbagaria.com/install | sh
+
+Then run `declutterinator` to scan, review the report and choose what to remove. `declutterinator clean --dry-run` lists every path without changing anything.
+
+What it finds:
+
+- Safe to remove (regenerates on its own): app caches (~/Library/Caches), logs, the Trash, Xcode DerivedData, simulator caches, unavailable simulators, and the caches of npm, Yarn, pnpm, Bun, pip, uv, Cargo, Gradle, Go, CocoaPods and Homebrew.
+- Probably fine (costs a re-download or rebuild): node_modules, Rust target, .venv, Pods and .next folders in projects untouched for 30+ days; Electron and Chromium web caches; Xcode device support files; Docker images and build cache; installers (.dmg, .pkg); zip files already unzipped next to their folder.
+- The user's call (never pre-selected, moved to the Trash): old downloads, large files, apps not opened in 6+ months, iPhone/iPad backups, Xcode archives.
+
+Safety: nothing is removed without confirmation; personal files go to the Trash; every path is re-checked to be inside the home folder and outside .ssh, Keychains, iCloud Drive, Mail and Messages; symlinks are never followed; sizes account for APFS clones and hard links.
+
+## Links
+
+- [Website](https://declutter.kunalbagaria.com/)
+- [How to clean up your Mac, step by step](https://declutter.kunalbagaria.com/how-to-clean-up-your-mac/): a manual guide to every place macOS hides wasted space, with commands.
+- [Source code](https://github.com/KunalBagaria/declutterinator)
+- [Install script](https://declutter.kunalbagaria.com/install)
